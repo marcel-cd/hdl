@@ -76,28 +76,3 @@ set_property -dict {PACKAGE_PIN J15 IOSTANDARD LVCMOS18} [get_ports spi_mosi]   
 set_property -dict {PACKAGE_PIN E18 IOSTANDARD LVCMOS18} [get_ports spi_miso]                       ; ## G12  FMC0_LA08_P           IO_L9P_T1L_N4_AD12P_67
 
 
-
-
-# clocks
-
-create_clock -name tx_ref_clk     -period  4.00 [get_ports ref_clk0_p]
-create_clock -name rx_ref_clk     -period  4.00 [get_ports ref_clk1_p]
-
-
-# For transceiver output clocks use reference clock 
-# This will help autoderive the clocks correcly
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/TXSYSCLKSEL[0]]
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/TXSYSCLKSEL[1]]
-set_case_analysis -quiet 1 [get_pins -quiet -hier *_channel/TXOUTCLKSEL[0]]
-set_case_analysis -quiet 1 [get_pins -quiet -hier *_channel/TXOUTCLKSEL[1]]
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/TXOUTCLKSEL[2]]
-
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/RXSYSCLKSEL[0]]
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/RXSYSCLKSEL[1]]
-set_case_analysis -quiet 1 [get_pins -quiet -hier *_channel/RXOUTCLKSEL[0]]
-set_case_analysis -quiet 1 [get_pins -quiet -hier *_channel/RXOUTCLKSEL[1]]
-set_case_analysis -quiet 0 [get_pins -quiet -hier *_channel/RXOUTCLKSEL[2]]
-
-create_generated_clock -name tx_div_clk     [get_pins i_system_wrapper/system_i/util_adrv9009_xcvr/inst/i_xch_0/i_gthe4_channel/TXOUTCLK]
-create_generated_clock -name rx_div_clk     [get_pins i_system_wrapper/system_i/util_adrv9009_xcvr/inst/i_xch_0/i_gthe4_channel/RXOUTCLK]
-create_generated_clock -name rx_os_div_clk  [get_pins i_system_wrapper/system_i/util_adrv9009_xcvr/inst/i_xch_2/i_gthe4_channel/RXOUTCLK]
