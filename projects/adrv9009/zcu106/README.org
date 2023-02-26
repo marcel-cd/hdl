@@ -1,0 +1,11 @@
+#+title: ADRV9009 with ZCU106
+#+author: Marcel Graber <marcel@clever.design>
+
+* Remarks
+use FMC0 for the ADRV9009
+if you need to use FMC1, run the following command in this folder:
+~tclsh ../../scripts/adi_fmc_constr_generator.tcl fmc1~
+copy the data in the file  fmc_constr.xdc to system_bd.tcl
+
+* Build
+~make~
